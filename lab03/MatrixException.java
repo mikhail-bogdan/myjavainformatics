@@ -1,8 +1,12 @@
 public class MatrixException extends RuntimeException
 {
-	public MatrixException
+	public MatrixException(String message)
+	{
+		super(message);
+	}
+
 	public String getMessage()
 	{
-		return 
+		return super.getMessage();
 	}
 }
