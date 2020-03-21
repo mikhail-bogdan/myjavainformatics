@@ -15,5 +15,23 @@ public class Lab02
 			result = result.product(matrix);
 			System.out.println(result);
 		}
+
+		System.out.print("\n\n\n\n\n");
+
+		Matrix a = new Matrix(3), b;
+		a.setElement(0, 0, 3);
+		a.setElement(1, 0, 1);
+		a.setElement(2, 0, 2);
+		a.setElement(0, 1, 3);
+		a.setElement(1, 1, 1);
+		a.setElement(2, 1, 2);
+		a.setElement(0, 2, 3);
+		a.setElement(1, 2, 1);
+		a.setElement(2, 2, 2);
+
+		System.out.println(a.toString());
+
+		b = a.doSortRows();
+		System.out.println(b.toString());
 	}
 }

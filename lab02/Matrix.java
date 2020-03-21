@@ -13,6 +13,19 @@ public class Matrix
 		}
 	}
 
+	public Matrix(Matrix matrix)
+	{
+		this(matrix.size);
+
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = 0; j < size; j++)
+			{
+				setElement(i, j, matrix.getElement(i, j));
+			}
+		}
+	}
+
 	public Matrix sum(Matrix n)
 	{
 		Matrix matrix = new Matrix(size);
@@ -56,14 +69,49 @@ public class Matrix
 
 	public String toString()
 	{
-		String line = "";
+		StringBuilder line = new StringBuilder();
 		for(int i = 0; i < size; i++)
 		{
-			line += "[";
-			for(int j = 0; j < size - 1; j++) line += data[i][j] + ", ";
-			line += "" + data[i][size - 1];
-			line += "]\n";
+			line.append("[");
+			for(int j = 0; j < size - 1; j++) line.append(getElement(i, j) + ", ");
+			line.append(getElement(i, size - 1) + "]\n");
 		}
-		return line;
+		return line.toString();
+	}
+
+	private int rowWeight(int i)
+	{
+		int sum = 0;
+		for(int j = 0; j < size; j++)
+			sum += getElement(i, j);
+		return sum;
+	}
+
+	private void swapRows(int index1, int index2)
+	{
+		int tmp;
+		for(int j = 0; j < size; j++)
+		{
+			tmp = getElement(index1, j);
+			setElement(index1, j, getElement(index2, j));
+			setElement(index2, j, tmp);
+		}
+	}
+
+	public Matrix doSortRows()
+	{
+		Matrix matrix = new Matrix(this);
+		for(int i = 0; i < size; i++)
+		{
+			for(int j = i + 1; j < size; j++)
+			{
+				if(matrix.rowWeight(i) > matrix.rowWeight(j))
+				{
+					//System.out.println("" + i + "   " + j);
+					matrix.swapRows(i, j);
+				}
+			}
+		}
+		return matrix;
 	}
 }
